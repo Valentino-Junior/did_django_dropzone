@@ -1,5 +1,7 @@
 var Drop = Dropzone.options.DidDropzone = {
 
+    addRemoveLinks: true,
+
     autoProcessQueue: false, //stops from uploading files until user submits form
     paramName: "image", // The name that will be used to transfer the file
     maxFilesize: 0.5, // Maximum size of file that you will allow (MB)
@@ -7,6 +9,9 @@ var Drop = Dropzone.options.DidDropzone = {
     acceptedFiles: '.jpg,.jpeg,.JPEG,.JPG,.png,.PNG', //accepted file types
     maxFiles: 10, //Maximum number of files/images in dropzone
     parallelUploads: 10,
+    addRemoveLinks: true,
+    dictRemoveFile: "Remove",
+
     previewTemplate: '<div class="dz-preview dz-image-preview">'+
                         '<div class="dz-image">'+
                         '<img data-dz-thumbnail />'+
