@@ -6,7 +6,7 @@ var Drop = Dropzone.options.DidDropzone = {
     paramName: "image", // The name that will be used to transfer the file
     maxFilesize: 0.5, // Maximum size of file that you will allow (MB)
     clickable: true, // This allows the dropzone to select images onclick
-    acceptedFiles: '.jpg,.jpeg,.JPEG,.JPG,.png,.PNG', //accepted file types
+    acceptedFiles: ".jpeg, .jpg, .png, .gif, .pptx, .ppt, .doc,.docx, .xls, .xlsx,.csv, .tsv, .ppt,.pptx,.pages,.odt,", //accepted file types
     maxFiles: 10, //Maximum number of files/images in dropzone
     parallelUploads: 10,
     addRemoveLinks: true,
