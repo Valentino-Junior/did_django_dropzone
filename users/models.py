@@ -60,8 +60,8 @@ Our UserImage model is used to store images passed through via dropzone
 class UserImage(models.Model):
 	
 	timestamp = models.DateTimeField(auto_now_add=True)
-	image = models.ImageField(verbose_name="User image", upload_to="user_images")
+	image = models.FileField(verbose_name="User image", upload_to="user_images")
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def __str__(self):
-		return f'{self.user}'
+		return f'{self.image}'

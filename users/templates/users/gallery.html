@@ -29,11 +29,17 @@
 <div class="img-container">
 
 
-  {% for i in images %}
+  <!-- {% for i in images %}
   <div class="gallery">
     <img src="{{i.image.url}}" alt="Profile image {{i.id}}">
   </div>
-  {% endfor %}
+  {% endfor %} -->
+
+  {% for i in images %}
+  <div class="gallery">
+    <span>{{i}}</span>
+  </div>
+  {% endfor %} 
 
 </div>
 
