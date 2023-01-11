@@ -62,6 +62,7 @@ class UserImage(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True)
 	image = models.FileField(verbose_name="User image", upload_to="user_images")
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	instructions = models.CharField(max_length=255, null=True, blank=True)
 
 	def __str__(self):
 		return f'{self.image}'
