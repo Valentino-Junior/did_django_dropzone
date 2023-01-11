@@ -292,7 +292,9 @@ def dropzone_image(request):
 		
 		user = request.user
 		image = request.FILES.get('image')
-		img = UserImage.objects.create(image = image, user = user)
+		instructions = request.POST.get('instructions')
+
+		img = UserImage.objects.create(image = image, user = user, instructions=instructions)
 		
 		return HttpResponse({},content_type="application/json")
 
