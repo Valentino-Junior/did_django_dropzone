@@ -104,6 +104,6 @@ class ImageForm(forms.ModelForm):
 		model = UserImage
 		fields = ('instructions',)
 		widgets = {
-            'instructions': Textarea(attrs={'cols': 80, 'rows': 6}),
+            'instructions': Textarea(attrs={'cols': 80, 'rows': 5}),
         }
 
