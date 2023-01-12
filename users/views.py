@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.http import JsonResponse
 import json
+from .forms import ImageForm
 
 from .models import (
 	UserToken,
@@ -263,7 +264,7 @@ Images upload view for registered users
 @login_required
 def images(request):
 	
-	return render(request, 'users/images.html', {})
+	return render(request, 'users/files.html', {})
 
 
 
@@ -282,32 +283,32 @@ def gallery(request):
 
 
 
-'''
-AJAX function to handle dropzone images
-'''
+
+
+
+
+@login_required
+def images(request):
+
+    if request.method == "POST":
+        form = ImageForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            image = request.FILES.get('image')
+            instructions = form.cleaned_data['instructions']
+            img = UserImage.objects.create(image=image, user=user, instruction=instructions)
+            return HttpResponse({}, content_type="application/json")
+    else:
+        form = ImageForm()
+
+    return render(request, "users/files.html", {"form": form})
+
+
 @login_required
 def dropzone_image(request):
-	
-	if request.method == "POST":
-		
-		user = request.user
-		image = request.FILES.get('image')
-		instructions = request.POST.get('instructions')
+	context = {}
 
-		img = UserImage.objects.create(image = image, user = user, instructions=instructions)
-		
-		return HttpResponse({},content_type="application/json")
-
-	return HttpResponse(
-		json.dumps({"result": result, "message": message}),
-		content_type="application/json"
-		)
-
-
-
-
-
-
+    
 '''
 AJAX function to request email view for registered users
 '''

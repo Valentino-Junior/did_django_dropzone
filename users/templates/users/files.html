@@ -30,13 +30,15 @@
 <div class="container">
   <label for="dropzone">Profile images</label>
   <form action="/dropzone-image" id="DidDropzone" class="dropzone" accept-charset="UTF-8" method="POST">
-      {% csrf_token %}
-      <div class="dz-message">Click Here or Drop Files Here To Upload - 500kb maximum (0.5mb)</div>
-
-      <textarea id="instructions" name="instructions" rows="4" cols="50"></textarea>      
-  </form>  
-  <br>  
-  <button id="image-btn" type="submit" >Add images</button>                        
+    {% csrf_token %}
+    <div class="dz-message">Click Here or Drop Files Here To Upload - 500kb maximum (0.5mb)</div>
+</form>
+<br>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="image-btn" type="submit" >Add images</button>
+</form>                      
 
 </div>
 

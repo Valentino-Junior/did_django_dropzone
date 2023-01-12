@@ -1,8 +1,8 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import UserProfile, UserToken
+from .models import *
 
 
 # DOCS - https://docs.djangoproject.com/en/1.8/_modules/django/contrib/auth/forms/
@@ -98,4 +98,12 @@ class ForgottenPasswordForm(SetPasswordForm):
 		model = User
 		fields = ('password1', 'password2', )
 
+
+class ImageForm(forms.ModelForm):
+	class Meta:
+		model = UserImage
+		fields = ('instructions',)
+		widgets = {
+            'instructions': Textarea(attrs={'cols': 80, 'rows': 6}),
+        }
 
