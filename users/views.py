@@ -309,19 +309,39 @@ def images(request):
 
 @login_required
 def dropzone_image(request):
-	
-	if request.method == "POST":
-		
-		user = request.user
-		image = request.FILES.get('image')
-		img = UserImage.objects.create(image = image, user = user)
-		
-		return HttpResponse({},content_type="application/json")
+    if request.method == "POST":
+        fileType = request.POST.get('fileType')
+        if fileType:
+            user = request.user
+            image = request.FILES.get('image')
+            UserImage.objects.create(image=image, user=user, fileType=fileType)
+            return HttpResponse({}, content_type="application/json")
+        else:
+            return HttpResponse(
+                json.dumps({"result": "error", "message": "Please select file type"}),
+                content_type="application/json"
+            )
+    return HttpResponse(
+        json.dumps({"result": "error", "message": "Invalid request"}),
+        content_type="application/json"
+    )
 
-	return HttpResponse(
-		json.dumps({"result": result, "message": message}),
-		content_type="application/json"
-		)
+
+# @login_required
+# def dropzone_image(request):
+	
+# 	if request.method == "POST":
+		
+# 		user = request.user
+# 		image = request.FILES.get('image')
+# 		img = UserImage.objects.create(image = image, user = user)
+		
+# 		return HttpResponse({},content_type="application/json")
+
+# 	return HttpResponse(
+# 		json.dumps({"result": result, "message": message}),
+# 		content_type="application/json"
+# 		)
 
     
 '''

@@ -41,6 +41,10 @@ var Drop = Dropzone.options.DidDropzone = {
       });
       //other functions here
   }
+      //other functions here
+  
+
+        
 
         //process the queued images on click
         // submitButton.addEventListener("click", function() {
@@ -56,18 +60,6 @@ var Drop = Dropzone.options.DidDropzone = {
         // instructionForm.submit();
 
         //fire the images to url
-        myDropzone.on("processing", function(file) {
-          myDropzone.options.url = url;
-        });
 
-        //clear the dropzone when complete
-        myDropzone.on("complete", function(file) {
-            myDropzone.removeFile(file);
-        });
-    },
-    success: function(file, json){
-
-        // alert("Perfect! Now visit your gallery...")      
         
-    },
 }

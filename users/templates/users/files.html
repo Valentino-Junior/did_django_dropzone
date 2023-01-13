@@ -4,12 +4,12 @@
 
 {% block extend_head %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'dropzone-5.7.0/dist/basic.css' %}">  
+<link rel="stylesheet" type="text/css" href="{% static 'dropzone-5.7.0/dist/basic.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'dropzone-5.7.0/dist/dropzone.css' %}">
 
 {% endblock %}
 
-{% block extend_nav %} 
+{% block extend_nav %}
 
 <ul class="sidenav">
   <li><a href="{% url 'users:account' %}">Demo User Account</a></li>
@@ -24,7 +24,8 @@
 
 {% block content %}
 
-<h3>Django Dropzone Demo - Add Images for <b style="color:#9c07b6">{{request.user.first_name}} {{request.user.last_name}}</b></h3>
+<h3>Django Dropzone Demo - Add Images for <b style="color:#9c07b6">{{request.user.first_name}}
+    {{request.user.last_name}}</b></h3>
 
 
 <div class="container">
@@ -32,18 +33,20 @@
   <form action="/dropzone-image" id="DidDropzone" class="dropzone" accept-charset="UTF-8" method="POST">
     {% csrf_token %}
     <div class="dz-message">Click Here or Drop Files Here To Upload - 500kb maximum (0.5mb)</div>
-</form>
-<br>
 
-<select id="fileType" name="fileType">
-  <option value="" disabled selected>Select file type</option>
-  <option value="Revision">Revision</option>
-  <option value="Draft">Draft</option>
-  <option value="Final">Final</option>
-</select>
-<button id="image-btn" type="submit" >Add images</button>
+    <select id="fileType" name="fileType" style="width: 210px;">
+      <option value="" disabled selected>Select file type</option>
+      <option value="Revision">Revision</option>
+      <option value="Draft">Draft</option>
+      <option value="Final">Final</option>
+    </select>
 
-<!-- <form method="post" id="instruction-form">
+  </form>
+  <br>
+
+  <button id="image-btn" type="submit">Add images</button>
+
+  <!-- <form method="post" id="instruction-form">
     {% csrf_token %}
     {{ form.as_p }}
 </form>                       -->
@@ -57,9 +60,9 @@
 {% endblock %}
 
 {% block extend_footer %}
-  
 
-  <script src="{% static 'dropzone-5.7.0/dist/dropzone.js' %}"></script>
-  <script src="{% static 'dropzone.js' %}"></script>
+
+<script src="{% static 'dropzone-5.7.0/dist/dropzone.js' %}"></script>
+<script src="{% static 'dropzone.js' %}"></script>
 
 {% endblock %}
