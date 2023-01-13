@@ -32,15 +32,28 @@ var Drop = Dropzone.options.DidDropzone = {
         var url = $('#DidDropzone').attr("action")
         myDropzone = this;
 
-        //process the queued images on click
-        submitButton.addEventListener("click", function() {
-            myDropzone.processQueue(); 
-            // Get the instruction form by its id
-    var instructionForm = document.getElementById("instruction-form");
+        submitButton.addEventListener("click", function () {
+          if(fileTypeSelect.value) {
+              myDropzone.processQueue();
+          } else {
+              alert("Please select the file type")
+          }
+      });
+      //other functions here
+  }
 
-    // Submit the instruction form
-    instructionForm.submit();
-        });
+        //process the queued images on click
+        // submitButton.addEventListener("click", function() {
+ 
+        //     myDropzone.processQueue(); 
+        //     // Get the instruction form by its id
+    
+        // });
+
+        // var instructionForm = document.getElementById("instruction-form");
+
+        // // Submit the instruction form
+        // instructionForm.submit();
 
         //fire the images to url
         myDropzone.on("processing", function(file) {

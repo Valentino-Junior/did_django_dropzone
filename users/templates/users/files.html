@@ -35,12 +35,18 @@
 </form>
 <br>
 
+<select id="fileType" name="fileType">
+  <option value="" disabled selected>Select file type</option>
+  <option value="Revision">Revision</option>
+  <option value="Draft">Draft</option>
+  <option value="Final">Final</option>
+</select>
 <button id="image-btn" type="submit" >Add images</button>
 
-<form method="post" id="instruction-form">
+<!-- <form method="post" id="instruction-form">
     {% csrf_token %}
     {{ form.as_p }}
-</form>                      
+</form>                       -->
 
 </div>
 
