@@ -294,19 +294,34 @@ def images(request):
         form = ImageForm(request.POST)
         if form.is_valid():
             user = request.user
-            image = request.FILES.get('image')
             instructions = form.cleaned_data['instructions']
-            img = UserImage.objects.create(image=image, user=user, instruction=instructions)
+            img = UserImage.objects.create( user=user, instructions=instructions)
             return HttpResponse({}, content_type="application/json")
+		    	
+			
+		
     else:
         form = ImageForm()
+		
 
-    return render(request, "users/files.html", {"form": form})
+    return render(request, "users/files.html", {'form':form})
 
 
 @login_required
 def dropzone_image(request):
-	context = {}
+	
+	if request.method == "POST":
+		
+		user = request.user
+		image = request.FILES.get('image')
+		img = UserImage.objects.create(image = image, user = user)
+		
+		return HttpResponse({},content_type="application/json")
+
+	return HttpResponse(
+		json.dumps({"result": result, "message": message}),
+		content_type="application/json"
+		)
 
     
 '''
