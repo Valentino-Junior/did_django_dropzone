@@ -33,11 +33,11 @@
     {% csrf_token %}
     <div class="dz-message">Click Here or Drop Files Here To Upload - 500kb maximum (0.5mb)</div>
 
-<select id="fileType" name="fileType" style="width: 100px; height: 40px;">
-  <option value="" disabled selected>File</option>
-  <option value="Revision">Revision</option>
-  <option value="Draft">Draft</option>
-  <option value="Final">Final</option>
+<select id="fileType" name="fileType" style="width: 100px; height: 40px; display: flex; float: right;">
+  <option value="" disabled selected style="width: 100px; height: 40px;">File</option>
+  <option value="Revision" style="width: 100px; height: 40px;">Revision</option>
+  <option value="Draft" style="width: 100px; height: 40px;">Draft</option>
+  <option value="Final" style="width: 100px; height: 40px;">Final</option>
 </select>
 
 </form>
