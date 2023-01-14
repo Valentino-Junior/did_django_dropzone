@@ -32,12 +32,16 @@ var Drop = Dropzone.options.DidDropzone = {
         var url = $('#DidDropzone').attr("action")
         myDropzone = this;
 
-        submitButton.addEventListener("click", function () {
-          if(fileTypeSelect.value) {
-              myDropzone.processQueue();
-          } else {
-              alert("Please select the file type")
-          }
+        
+
+
+      submitButton.addEventListener("click", function() {
+        if (!fileType.value) {
+          alert("Please select a file type before submitting");
+        } else {
+          myDropzone.options.url = url + '?file_type=' + fileType.value;
+          myDropzone.processQueue();
+        }
       });
       //other functions here
   }

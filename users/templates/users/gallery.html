@@ -38,6 +38,7 @@
   {% for i in images %}
   <div class="gallery">
     <span>{{i.image.name}} {{i.image.size|filesizeformat}} {{i.instructions}}</span>
+    <span>{{i.fileType}}</span>
   </div>
   {% endfor %} 
 
