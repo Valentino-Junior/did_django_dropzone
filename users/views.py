@@ -263,7 +263,7 @@ Images upload view for registered users
 @login_required
 def images(request):
 	
-	return render(request, 'users/images.html', {})
+	return render(request, 'users/files.html', {})
 
 
 
