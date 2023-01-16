@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.http import JsonResponse
 import json
+from .forms import ImageForm
 
 from .models import (
 	UserToken,
@@ -263,7 +264,7 @@ Images upload view for registered users
 @login_required
 def images(request):
 	
-	return render(request, 'users/images.html', {})
+	return render(request, 'users/files.html', {})
 
 
 
@@ -282,30 +283,67 @@ def gallery(request):
 
 
 
-'''
-AJAX function to handle dropzone images
-'''
+
+
+
+
+@login_required
+def images(request):
+
+    if request.method == "POST":
+        form = ImageForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            instructions = form.cleaned_data['instructions']
+            img = UserImage.objects.create( user=user, instructions=instructions)
+            return HttpResponse({}, content_type="application/json")
+		    	
+			
+		
+    else:
+        form = ImageForm()
+		
+
+    return render(request, "users/files.html", {'form':form})
+
+
 @login_required
 def dropzone_image(request):
+    if request.method == "POST":
+        fileType = request.POST.get('fileType')
+        if fileType:
+            user = request.user
+            image = request.FILES.get('image')
+            UserImage.objects.create(image=image, user=user, fileType=fileType)
+            return HttpResponse({}, content_type="application/json")
+        else:
+            return HttpResponse(
+                json.dumps({"result": "error", "message": "Please select file type"}),
+                content_type="application/json"
+            )
+    return HttpResponse(
+        json.dumps({"result": "error", "message": "Invalid request"}),
+        content_type="application/json"
+    )
+
+
+# @login_required
+# def dropzone_image(request):
 	
-	if request.method == "POST":
+# 	if request.method == "POST":
 		
-		user = request.user
-		image = request.FILES.get('image')
-		img = UserImage.objects.create(image = image, user = user)
+# 		user = request.user
+# 		image = request.FILES.get('image')
+# 		img = UserImage.objects.create(image = image, user = user)
 		
-		return HttpResponse({},content_type="application/json")
+# 		return HttpResponse({},content_type="application/json")
 
-	return HttpResponse(
-		json.dumps({"result": result, "message": message}),
-		content_type="application/json"
-		)
+# 	return HttpResponse(
+# 		json.dumps({"result": result, "message": message}),
+# 		content_type="application/json"
+# 		)
 
-
-
-
-
-
+    
 '''
 AJAX function to request email view for registered users
 '''
@@ -428,4 +466,5 @@ def verification(request, uidb64, token):
 
 
 	
+
 
