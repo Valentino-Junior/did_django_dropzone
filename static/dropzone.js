@@ -1,12 +1,17 @@
 var Drop = Dropzone.options.DidDropzone = {
 
+  addRemoveLinks: true,
+
   autoProcessQueue: false, //stops from uploading files until user submits form
   paramName: "image", // The name that will be used to transfer the file
-  maxFilesize: 500, // Maximum size of file that you will allow (MB)
+  maxFilesize: 0.5, // Maximum size of file that you will allow (MB)
   clickable: true, // This allows the dropzone to select images onclick
-  acceptedFiles: '.jpg,.jpeg,.JPEG,.JPG,.png,.PNG', //accepted file types
+  acceptedFiles: ".jpeg, .jpg, .png, .gif, .pptx, .ppt, .doc,.docx, .xls, .xlsx,.csv, .tsv, .ppt,.pptx,.pages,.odt,", //accepted file types
   maxFiles: 10, //Maximum number of files/images in dropzone
   parallelUploads: 10,
+  addRemoveLinks: true,
+  dictRemoveFile: "Remove",
+
   previewTemplate: '<div class="dz-preview dz-image-preview">'+
                       '<div class="dz-image">'+
                       '<img data-dz-thumbnail />'+
@@ -27,24 +32,27 @@ var Drop = Dropzone.options.DidDropzone = {
       var url = $('#DidDropzone').attr("action")
       myDropzone = this;
 
-      //process the queued images on click
-      submitButton.addEventListener("click", function() {
-          myDropzone.processQueue(); 
-      });
+    submitButton.addEventListener("click", function() {
+      if (!fileType.value) {
+        alert("Please select a file type before submitting");
+      } else {
+        myDropzone.options.url = url + '?file_type=' + fileType.value;
+        myDropzone.processQueue();
+      }
+    });
+    //fire the images to url
+    myDropzone.on("processing", function(file) {
+      myDropzone.options.url = url;
+    });
 
-      //fire the images to url
-      myDropzone.on("processing", function(file) {
-        myDropzone.options.url = url;
-      });
+    //clear the dropzone when complete
+    myDropzone.on("complete", function(file) {
+        myDropzone.removeFile(file);
+    });
+},
+success: function(file, json){
 
-      //clear the dropzone when complete
-      myDropzone.on("complete", function(file) {
-          myDropzone.removeFile(file);
-      });
-  },
-  success: function(file, json){
-
-      // alert("Perfect! Now visit your gallery...")      
-      
-  },
+    // alert("Perfect! Now visit your gallery...")      
+    
+},
 }
