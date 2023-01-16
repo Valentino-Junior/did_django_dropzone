@@ -32,9 +32,6 @@ var Drop = Dropzone.options.DidDropzone = {
         var url = $('#DidDropzone').attr("action")
         myDropzone = this;
 
-        
-
-
       submitButton.addEventListener("click", function() {
         if (!fileType.value) {
           alert("Please select a file type before submitting");
@@ -43,27 +40,19 @@ var Drop = Dropzone.options.DidDropzone = {
           myDropzone.processQueue();
         }
       });
-      //other functions here
-  }
-      //other functions here
-  
+      //fire the images to url
+      myDropzone.on("processing", function(file) {
+        myDropzone.options.url = url;
+      });
 
-        
+      //clear the dropzone when complete
+      myDropzone.on("complete", function(file) {
+          myDropzone.removeFile(file);
+      });
+  },
+  success: function(file, json){
 
-        //process the queued images on click
-        // submitButton.addEventListener("click", function() {
- 
-        //     myDropzone.processQueue(); 
-        //     // Get the instruction form by its id
-    
-        // });
-
-        // var instructionForm = document.getElementById("instruction-form");
-
-        // // Submit the instruction form
-        // instructionForm.submit();
-
-        //fire the images to url
-
-        
+      // alert("Perfect! Now visit your gallery...")      
+      
+  },
 }
