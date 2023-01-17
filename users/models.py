@@ -67,3 +67,10 @@ class UserImage(models.Model):
 
 	def __str__(self):
 		return f'{self.image}'
+
+class Comment(models.Model):
+    file = models.ForeignKey(UserImage, on_delete=models.CASCADE)
+    comment = models.TextField()
+
+    def __str__(self):
+        return f'{self.comment}'
