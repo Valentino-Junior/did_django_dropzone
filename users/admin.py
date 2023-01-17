@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import UserProfile, UserToken, UserImage
+from . models import UserProfile, UserToken, UserImage, Comment
 
 
 # DOCS - https://docs.djangoproject.com/en/3.1/ref/contrib/admin/
@@ -24,4 +24,10 @@ class UserImageAdmin(admin.ModelAdmin):
 
 admin.site.register(UserImage,UserImageAdmin)
 
+
+class CommentAdmin(admin.ModelAdmin):
+	
+	list_display = ('file', 'Comment',)
+
+admin.site.register(Comment, CommentAdmin)
 
