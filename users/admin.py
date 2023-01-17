@@ -27,7 +27,7 @@ admin.site.register(UserImage,UserImageAdmin)
 
 class CommentAdmin(admin.ModelAdmin):
 	
-	list_display = ('file', 'Comment',)
+	list_display = ('file', 'comment',)
 
 admin.site.register(Comment, CommentAdmin)
 
