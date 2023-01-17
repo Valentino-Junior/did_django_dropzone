@@ -69,7 +69,8 @@ class UserImage(models.Model):
 		return f'{self.image}'
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE, default= 1)
+
     file = models.ForeignKey(UserImage, on_delete=models.CASCADE)
     comment = models.TextField()
 
