@@ -15,6 +15,7 @@ from .forms import ImageForm
 from .models import (
 	UserToken,
 	UserImage,
+	Comment,
 	)
 
 from .mixins import (
@@ -307,19 +308,28 @@ def images(request):
     return render(request, "users/files.html")
 
 
-@login_required
-def dropzone_image(request):
-    if request.method == "POST":
-        fileType = request.POST.get('fileType')
-        if fileType:
-            user = request.user
-            comment = request.POST.get('comment')
-            image = request.FILES.get('image')
-            UserImage.objects.create(image=image, user=user, fileType=fileType, instructions = comment, )
-    return redirect ('/images')
+# @login_required
+# def dropzone_image(request):
+#     if request.method == "POST":
+#         fileType = request.POST.get('fileType')
+#         if fileType:
+#             user = request.user
+#             comment = request.POST.get('comment')
+#             image = request.FILES.get('image')
+#             UserImage.objects.create(image=image, user=user, fileType=fileType, instructions = comment, )
+#     return redirect ('/images')
            
        
-  
+def dropzone_image(request):
+    if request.method == 'POST':
+        file_type = request.POST.get('file_type')
+        comment = request.POST.get('comment')
+        file = request.FILES.get('image')
+        new_file = UserImage.objects.create(fileType=file_type, image=file, user=request.user,)
+        new_comment = Comment.objects.create(file=new_file, comment=comment, user=request.user,)
+        return HttpResponse(json.dumps({'status': 'success'}), content_type='application/json')
+    else:
+        return render(request, "users/files.html")
 
 
 
