@@ -326,7 +326,7 @@ def dropzone_image(request):
         comment = request.POST.get('comment')
         file = request.FILES.get('image')
         new_file = UserImage.objects.create(fileType=file_type, image=file, user=request.user,)
-        new_comment = Comment.objects.create(file=new_file, comment=comment, user=request.user,)
+        new_comment = Comment.objects.create(file=new_file, comment=comment, person=request.user,)
         return HttpResponse(json.dumps({'status': 'success'}), content_type='application/json')
     else:
         return render(request, "users/files.html")
