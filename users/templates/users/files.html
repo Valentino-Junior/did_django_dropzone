@@ -4,6 +4,8 @@
 
 {% block extend_head %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+
 <link rel="stylesheet" type="text/css" href="{% static 'dropzone-5.7.0/dist/basic.css' %}">  
 <link rel="stylesheet" type="text/css" href="{% static 'dropzone-5.7.0/dist/dropzone.css' %}">
 
@@ -29,27 +31,34 @@
 
 <div class="container">
   <label for="dropzone">Profile images</label>
-  <form action="/dropzone-image" id="DidDropzone" class="dropzone" accept-charset="UTF-8" method="POST">
-    {% csrf_token %}
-    <div class="dz-message">Click Here or Drop Files Here To Upload - 500kb maximum (0.5mb)</div>
 
-<select id="fileType" name="fileType" style="width: 100px; height: 40px; display: flex; float: right; margin-right: 0px; padding-right: 0px;">
-  <option value="" disabled selected style="width: 100px; height: 40px;">File</option>
-  <option value="Revision" style="width: 100px; height: 40px;">Revision</option>
-  <option value="Draft" style="width: 100px; height: 40px;">Draft</option>
-  <option value="Final" style="width: 100px; height: 40px;">Final</option>
-</select>
 
+
+
+
+
+
+
+
+<form method="post" enctype="multipart/form-data" action="/dropzone-image" >
+  {% csrf_token %}
+  <div class="dropzone" id="myDropzone">
+      <div class="dz-message">
+          Drag and drop your files here or <br> click to browse
+      </div>
+      <div class="fallback">
+          <input name="image" type="file" multiple />
+      </div>
+  </div>
+  <select id="fileType" name="fileType" style="width: 100px; height: 40px; display: flex; float: right; margin-right: 0px; padding-right: 0px;">
+    <option value="" disabled selected style="width: 100px; height: 40px;">File</option>
+    <option value="Revision" style="width: 100px; height: 40px;">Revision</option>
+    <option value="Draft" style="width: 100px; height: 40px;">Draft</option>
+    <option value="Final" style="width: 100px; height: 40px;">Final</option>
+  </select>
+  <input type="text" id="user-comment">
+  <input type="submit" id="image-btn" value="submit">
 </form>
-<br>
-
-<button id="image-btn" type="submit" >Add images</button>
-
-<!-- <form method="post" id="instruction-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-</form>                       -->
-
 </div>
 
 

@@ -290,21 +290,21 @@ def gallery(request):
 @login_required
 def images(request):
 
-    if request.method == "POST":
-        form = ImageForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            instructions = form.cleaned_data['instructions']
-            img = UserImage.objects.create( user=user, instructions=instructions)
-            return HttpResponse({}, content_type="application/json")
+    # if request.method == "POST":
+    #     form = ImageForm(request.POST)
+    #     if form.is_valid():
+    #         user = request.user
+    #         instructions = form.cleaned_data['instructions']
+    #         img = UserImage.objects.create( user=user, instructions=instructions)
+    #         return HttpResponse({}, content_type="application/json")
 		    	
 			
 		
-    else:
-        form = ImageForm()
+    # else:
+    #     form = ImageForm()
 		
 
-    return render(request, "users/files.html", {'form':form})
+    return render(request, "users/files.html")
 
 
 @login_required
@@ -313,35 +313,16 @@ def dropzone_image(request):
         fileType = request.POST.get('fileType')
         if fileType:
             user = request.user
+            comment = request.POST.get('comment')
             image = request.FILES.get('image')
-            UserImage.objects.create(image=image, user=user, fileType=fileType)
-            return HttpResponse({}, content_type="application/json")
-        else:
-            return HttpResponse(
-                json.dumps({"result": "error", "message": "Please select file type"}),
-                content_type="application/json"
-            )
-    return HttpResponse(
-        json.dumps({"result": "error", "message": "Invalid request"}),
-        content_type="application/json"
-    )
+            UserImage.objects.create(image=image, user=user, fileType=fileType, instructions = comment, )
+    return redirect ('/images')
+           
+       
+  
 
 
-# @login_required
-# def dropzone_image(request):
-	
-# 	if request.method == "POST":
-		
-# 		user = request.user
-# 		image = request.FILES.get('image')
-# 		img = UserImage.objects.create(image = image, user = user)
-		
-# 		return HttpResponse({},content_type="application/json")
 
-# 	return HttpResponse(
-# 		json.dumps({"result": result, "message": message}),
-# 		content_type="application/json"
-# 		)
 
     
 '''

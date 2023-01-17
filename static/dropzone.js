@@ -1,4 +1,6 @@
-var Drop = Dropzone.options.DidDropzone = {
+var myDropzone = new Dropzone("div#myDropzone", {
+  url: "{% url 'dropzone-image' %}",
+  method: "post",
   addRemoveLinks: true,
   autoProcessQueue: false, //stops from uploading files until user submits form
   paramName: "image", // The name that will be used to transfer the file
@@ -24,12 +26,13 @@ var Drop = Dropzone.options.DidDropzone = {
   init: function(){
       var submitButton = document.querySelector("#image-btn")
       var url = $('#DidDropzone').attr("action")
+      var comment = document.querySelector("#user-comment")
       myDropzone = this;
     submitButton.addEventListener("click", function() {
       if (!fileType.value) {
         alert("Please select a file type before submitting");
       } else {
-        myDropzone.options.url = url + '?file_type=' + fileType.value;
+        myDropzone.options.url = url + '?file_type=' + fileType.value + '&comment='+ comment.value;
         myDropzone.processQueue();
       }
     });
@@ -42,9 +45,11 @@ var Drop = Dropzone.options.DidDropzone = {
     myDropzone.on("complete", function(file) {
         myDropzone.removeFile(file);
         myDropzone.removeAllFiles();
+        comment.value = "";
     });
 },
 success: function(file, json){
+  window.location.reload();
     // alert("Perfect! Now visit your gallery...")      
 },
-}
+})
