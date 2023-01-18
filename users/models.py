@@ -72,7 +72,7 @@ class Comment(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE, default= 1)
 
     file = models.ForeignKey(UserImage, on_delete=models.CASCADE)
-    comment = models.TextField()
+    # comment = models.TextField()
 
     def __str__(self):
         return f'{self.comment}'
