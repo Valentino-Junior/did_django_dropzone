@@ -68,7 +68,7 @@ class UserImage(models.Model):
 		return f'{self.instructions}'
 
 class Comment(models.Model):
-    person = models.ForeignKey(User, on_delete=models.CASCADE, default= 1)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
 
     file = models.ForeignKey(UserImage, on_delete=models.CASCADE)
     image = models.FileField(verbose_name="User image", upload_to="user_images")

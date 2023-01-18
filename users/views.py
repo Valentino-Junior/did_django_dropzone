@@ -321,16 +321,9 @@ def dropzone_image(request):
                 new_file.save()
                 new_comment = Comment.objects.create(file=new_file, image=file, person=user)
                 new_comment.save()
-                return HttpResponse({}, content_type="application/json")
+                return redirect("/images")
         else:
-            return HttpResponse(
-                json.dumps({"result": "error", "message": "Please select file type"}),
-                content_type="application/json"
-            )
-    return HttpResponse(
-        json.dumps({"result": "error", "message": "Invalid request"}),
-        content_type="application/json"
-    )
+            return render(request, "users/files.html")
         
 
 
