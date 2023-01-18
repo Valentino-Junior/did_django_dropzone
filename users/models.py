@@ -60,7 +60,6 @@ Our UserImage model is used to store images passed through via dropzone
 class UserImage(models.Model):
 	
 	timestamp = models.DateTimeField(auto_now_add=True)
-	image = models.FileField(verbose_name="User image", upload_to="user_images")
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	instructions = models.CharField(max_length=255, null=True, blank=True)
 	fileType = models.CharField(max_length=20, blank=True, null=True)
@@ -72,6 +71,8 @@ class Comment(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE, default= 1)
 
     file = models.ForeignKey(UserImage, on_delete=models.CASCADE)
+    image = models.FileField(verbose_name="User image", upload_to="user_images")
+
     # comment = models.TextField()
 
     def __str__(self):

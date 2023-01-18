@@ -20,14 +20,14 @@ admin.site.register(UserToken,UserTokenAdmin)
 
 class UserImageAdmin(admin.ModelAdmin):
 	
-	list_display = ('id', 'user', 'image', 'instructions', 'fileType', 'timestamp',)
+	list_display = ('id', 'user', 'instructions', 'fileType', 'timestamp',)
 
 admin.site.register(UserImage,UserImageAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
 	
-	list_display = ('file', 'person',)
+	list_display = ('file', 'person', 'image',)
 
 admin.site.register(Comment, CommentAdmin)
 
