@@ -49,7 +49,7 @@ var myDropzone = new Dropzone("div#myDropzone", {
     });
 },
 success: function(file, json){
-  window.location.reload();
+  // window.location.reload();
     // alert("Perfect! Now visit your gallery...")      
 },
 })
