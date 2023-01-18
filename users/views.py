@@ -308,17 +308,7 @@ def images(request):
     return render(request, "users/files.html")
 
 
-# @login_required
-# def dropzone_image(request):
-#     if request.method == "POST":
-#         fileType = request.POST.get('fileType')
-#         if fileType:
-#             user = request.user
-#             comment = request.POST.get('comment')
-#             image = request.FILES.get('image')
-#             UserImage.objects.create(image=image, user=user, fileType=fileType, instructions = comment, )
-#     return redirect ('/images')
-           
+
        
 def dropzone_image(request):
     if request.method == 'POST':
@@ -327,8 +317,10 @@ def dropzone_image(request):
                 user = request.user
                 comment = request.POST.get('comment')
                 file = request.FILES.get('image')
-                new_file = UserImage.objects.create(fileType=file_type, image=file, instructions=comment, user=user)
-                new_comment = Comment.objects.create(file=new_file, comment=comment, person=user)
+                new_file = UserImage(fileType=file_type, instructions=comment, user=user)
+                new_file.save()
+                new_comment = Comment.objects.create(file=new_file, image=file, person=user)
+                new_comment.save()
         #         return HttpResponse(json.dumps({'status': 'success'}), content_type='application/json')
         # else:
         #         return render(request, "users/files.html")
