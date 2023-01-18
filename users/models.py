@@ -65,7 +65,7 @@ class UserImage(models.Model):
 	fileType = models.CharField(max_length=20, blank=True, null=True)
 
 	def __str__(self):
-		return f'{self.image}'
+		return f'{self.instructions}'
 
 class Comment(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE, default= 1)
@@ -76,4 +76,4 @@ class Comment(models.Model):
     # comment = models.TextField()
 
     def __str__(self):
-        return f'{self.comment}'
+        return f'{self.file}'

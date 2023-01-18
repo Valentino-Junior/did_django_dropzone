@@ -312,7 +312,7 @@ def images(request):
        
 def dropzone_image(request):
     if request.method == 'POST':
-        file_type = request.POST.get('file_type')
+        file_type = request.POST.get('fileType')
         if file_type:
                 user = request.user
                 comment = request.POST.get('comment')
@@ -321,10 +321,17 @@ def dropzone_image(request):
                 new_file.save()
                 new_comment = Comment.objects.create(file=new_file, image=file, person=user)
                 new_comment.save()
-        #         return HttpResponse(json.dumps({'status': 'success'}), content_type='application/json')
-        # else:
-        #         return render(request, "users/files.html")
-    return redirect ('/images')
+                return HttpResponse({}, content_type="application/json")
+        else:
+            return HttpResponse(
+                json.dumps({"result": "error", "message": "Please select file type"}),
+                content_type="application/json"
+            )
+    return HttpResponse(
+        json.dumps({"result": "error", "message": "Invalid request"}),
+        content_type="application/json"
+    )
+        
 
 
 
