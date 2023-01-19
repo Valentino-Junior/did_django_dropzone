@@ -1,5 +1,5 @@
 var myDropzone = new Dropzone("div#myDropzone", {
-  url: "{% url 'dropzone-image' %}",
+  url: "127.0.0.1:8000/dropzone-image/",
   method: "post",
   addRemoveLinks: true,
   autoProcessQueue: false, //stops from uploading files until user submits form

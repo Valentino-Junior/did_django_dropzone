@@ -319,7 +319,7 @@ def dropzone_image(request):
                 file = request.FILES.get('image')
                 new_file = UserImage(fileType=file_type, instructions=comment, user=user)
                 new_file.save()
-                new_comment = Comment.objects.create(file=new_file, image=file, person=user)
+                new_comment = Comment(file=new_file, image=file, person=user)
                 new_comment.save()
                 return redirect("/images")
         else:

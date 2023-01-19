@@ -40,7 +40,7 @@
 
 
 
-<form method="post" enctype="multipart/form-data" action="/dropzone-image" >
+<form method="post" id="DidDropzone" enctype="multipart/form-data" action="/dropzone-image" >
   {% csrf_token %}
   <div class="dropzone" id="myDropzone">
       <div class="dz-message">
@@ -57,8 +57,8 @@
     <option value="Final" style="width: 100px; height: 40px;">Final</option>
   </select>
   <input type="text" id="user-comment" name = "comment">
-  <input type="submit" id="image-btn" value="submit">
 </form>
+
 </div>
 
 
